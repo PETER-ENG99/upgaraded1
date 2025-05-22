@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile Money Tracker</title>
+  <script defer src="script.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4">
+  <div class="max-w-md mx-auto bg-white p-4 rounded-xl shadow-md">
+    <h1 class="text-xl font-bold mb-4 text-center">Mobile Money Tracker</h1>
+    <form id="transactionForm" class="space-y-2">
+      <input type="number" id="amount" placeholder="Amount" class="w-full border p-2 rounded" required />
+      <select id="type" class="w-full border p-2 rounded">
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </select>
+      <select id="channel" class="w-full border p-2 rounded">
+        <option value="Tigopesa">Tigopesa</option>
+        <option value="Mpesa">Mpesa</option>
+        <option value="Halopesa">Halopesa</option>
+        <option value="Mixx by YAS">Mixx by YAS</option>
+        <option value="NMB">NMB</option>
+        <option value="CRDB">CRDB</option>
+        <option value="Airtel">Airtel</option>
+      </select>
+      <button type="submit" class="w-full bg-green-600 text-white p-2 rounded">Add Transaction</button>
+    </form>
+    <div class="mt-6">
+      <h2 class="font-semibold text-lg">Channel Balances</h2>
+      <div id="summary" class="mt-2"></div>
+    </div>
+  </div>
+</body>
+</html>
