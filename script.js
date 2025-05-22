@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     transactionListDiv.innerHTML = rows.join('');
   }
 
-  // Set opening balance for a channel
+  // Set (or add to) opening balance for a channel
   openingBalanceForm.addEventListener('submit', e => {
     e.preventDefault();
     const channel = channelSelect.value;
@@ -96,12 +96,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isNaN(amount) || amount < 0) return alert('Enter a valid opening amount.');
 
     const openingBalances = getOpeningBalances();
-    openingBalances[channel] = amount;
+    if (!openingBalances[channel]) {
+      openingBalances[channel] = 0;
+    }
+    openingBalances[channel] += amount;  // Add to existing balance instead of overwrite
     saveOpeningBalances(openingBalances);
 
     openingBalanceForm.reset();
     updateSummary();
-    alert(`Opening balance set for ${channel}: ${amount.toLocaleString()}`);
+    alert(`Added ${amount.toLocaleString()} to opening balance for ${channel}.`);
   });
 
   // Add transaction (income or expense)
@@ -131,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // New day resets opening balances and transactions (confirm first)
   newDayBtn.addEventListener('click', () => {
-    if (confirm('Start a new day? This will clear today\'s opening balances and transactions.')) {
+    if (confirm('Start a new day? This will clear today\\'s opening balances and transactions.')) {
       localStorage.removeItem(keyOpeningBalances);
       localStorage.removeItem(keyTransactions);
       updateSummary();
